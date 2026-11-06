@@ -1,0 +1,160 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values .
+ * Colours are hex values from the TexTracer palette.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-navy: var(--brand-navy);
+}
+
+:root {
+  --radius: 0.375rem;
+  --background: #F6F7F4;
+  --foreground: #26332E;
+  --card: #FFFFFF;
+  --card-foreground: #26332E;
+  --popover: #FFFFFF;
+  --popover-foreground: #26332E;
+  --primary: #174C3C;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EEF1ED;
+  --secondary-foreground: #27332F;
+  --muted: #EEF1ED;
+  --muted-foreground: #78847D;
+  --accent: #E9EFE9;
+  --accent-foreground: #174C3C;
+  --destructive: #C84B4B;
+  --destructive-foreground: #FFFFFF;
+  --border: #E1E7E2;
+  --input: #D3DBD5;
+  --ring: #174C3C;
+  --success: #23845B;
+  --success-foreground: #FFFFFF;
+  --warning: #D99A35;
+  --warning-foreground: #6B4710;
+  --info: #3F6F5E;
+  --info-foreground: #FFFFFF;
+  --brand-gold: #D99A35;
+  --brand-navy: #174C3C;
+  --chart-1: #174C3C;
+  --chart-2: #3F6F5E;
+  --chart-3: #A8BBAA;
+  --chart-4: #D99A35;
+  --chart-5: #C84B4B;
+  --sidebar: #27332F;
+  --sidebar-foreground: #E8EDE9;
+  --sidebar-primary: #A8BBAA;
+  --sidebar-primary-foreground: #27332F;
+  --sidebar-accent: #34423D;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #3A4943;
+  --sidebar-ring: #A8BBAA;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+    min-width: 320px;
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0; }
+
+  button, a, input, select, textarea { transition-duration: 180ms; }
+
+  table tbody tr { transition: background-color 180ms ease; }
+  table tbody tr:hover { background-color: color-mix(in srgb, var(--accent) 60%, transparent); }
+  table thead th { font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: .04em; padding: 0 12px 10px 0; white-space: nowrap; }
+  table tbody td { padding-right: 12px; vertical-align: top; }
+  h1, h2, h3 { font-weight: 600; }
+}
+
+@keyframes splash-out {
+  0%, 72% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@utility splash-exit {
+  animation: splash-out 2.1s ease forwards;
+}
+
+@keyframes trace-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes scan-pulse { 0%,100% { transform: scale(.82); opacity:.35; } 50% { transform: scale(1); opacity:.8; } }
+@keyframes rise-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+@utility page-enter { animation: rise-in 320ms ease-out both; }
+@utility trace-line { transform-origin:left; animation:trace-line 800ms ease-out both; }
+@utility scan-pulse { animation:scan-pulse 1.8s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
